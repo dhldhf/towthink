@@ -22,7 +22,7 @@ window.api = {
   // 获得订单列表接口
   orderList: '/api/orderList',
   // 获得指定订单接口
-  order: '/api/order',
+  order: '/api/orders',
   // 获得商家列表接口
   businessList: '/shops',
   // 获得指定商家接口

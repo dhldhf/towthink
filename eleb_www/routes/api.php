@@ -48,7 +48,7 @@ Route::post('/addOrder','OrderController@addOrder');
 
 Route::get('/orderList','OrderController@orderList');
 
-Route::get('/order','OrderController@order');
+Route::get('/orders','OrderController@orders');
 
 Route::get('/orderList','OrderController@orderList');
 //Route::get('/sms',function (){

@@ -7,6 +7,7 @@ use App\Order_goods;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -15,7 +16,7 @@ class OrderController extends Controller
     {
 //        var_dump($request->id);die;
    $order = DB::table('orders')->where('id','=',$request->id)->first();
-//   var_dump($order);die;
+//   var_dump($orders);die;
    $goods_list = [];
        $Order_goods = DB::table('Order_goods')->where('order_id','=',$order->id)->first();
        $foods = DB::table('foods')->where('goods_id','=',$Order_goods->goods_id)->first();
@@ -51,7 +52,7 @@ class OrderController extends Controller
                     'order_price'=>$cart->goodsCount*$foods->goods_price,
                 ]
             );
-//            dd($order->id);
+//            dd($orders->id);
             Order_goods::create(
                 [
                     'order_id'=>$order->id,
@@ -64,6 +65,16 @@ class OrderController extends Controller
             );
         });
         $orders = DB::table('orders')->where('order_code','=',$a)->first();
+        $businesses =  DB::table('businesses')->where('information_id','=',$information->id)->first();
+        $business_name = $businesses->name;
+        $email = $businesses->email;
+        Mail::send(
+            'orders.mail',//邮件视图模板
+            ['name'=>$business_name],
+            function ($message)use($email){
+                $message->to($email)->subject('订单通知');
+            }
+        );
 //        dd($orders->id);
        return [
             "status"=> "true",
@@ -75,7 +86,7 @@ class OrderController extends Controller
     public function orderList()
     {
         $order = DB::table('orders')->where('user_id','=',Auth::user()->id)->get();
-//        var_dump($order);die;
+//        var_dump($orders);die;
         $goods_list = [];
         $money = 0;
         foreach ($order as $or){

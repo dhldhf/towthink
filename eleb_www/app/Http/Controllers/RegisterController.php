@@ -37,7 +37,7 @@ class RegisterController extends Controller
     public function login(Request $request)
     {
 //        echo 123;die;
-        if (Auth::attempt(['name'=>$request->name,'password'=>$request->password])){
+        if (Auth::attempt(['name'=>$request->name,'password'=>$request->password,])){
             return json_encode([
                 "status"=>"true",
                 "message"=>"登录成功",
