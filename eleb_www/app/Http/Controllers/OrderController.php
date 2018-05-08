@@ -14,9 +14,7 @@ class OrderController extends Controller
 
     public function order(Request $request)
     {
-//        var_dump($request->id);die;
    $order = DB::table('orders')->where('id','=',$request->id)->first();
-//   var_dump($orders);die;
    $goods_list = [];
        $Order_goods = DB::table('Order_goods')->where('order_id','=',$order->id)->first();
        $foods = DB::table('foods')->where('goods_id','=',$Order_goods->goods_id)->first();
