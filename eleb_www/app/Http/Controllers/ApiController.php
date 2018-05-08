@@ -10,7 +10,7 @@ class ApiController extends Controller
     public function show()
     {
         $shops = DB::table('information')->get();
-//        dd($shops);
+
         foreach ($shops as $shop){
             $shop->distance = 637;
         }
@@ -20,7 +20,6 @@ class ApiController extends Controller
     public function goods(Request $request)
     {
         $id = $request->id;
-//        dd($id);
         $business = DB::table('information')->find($id);
         $categories = DB::table('food_categories')->where('shop_id','=',$id)->get();
         $food = DB::table('foods')->where('shop_id','=',$id)->get();
