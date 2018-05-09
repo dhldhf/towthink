@@ -16,7 +16,7 @@ class OrderController extends Controller
     {
    $order = DB::table('orders')->where('id','=',$request->id)->first();
    $goods_list = [];
-       $Order_goods = DB::table('Order_goods')->where('order_id','=',$order->id)->first();
+       $Order_goods = DB::table('order_goods')->where('order_id','=',$order->id)->first();
        $foods = DB::table('foods')->where('goods_id','=',$Order_goods->goods_id)->first();
         $foods->amount = 1;
        $goods_list[] = $foods;
@@ -88,7 +88,7 @@ class OrderController extends Controller
         $goods_list = [];
         $money = 0;
         foreach ($order as $or){
-            $Order_goods = DB::table('Order_goods')->where('order_id','=',$or->id)->first();
+            $Order_goods = DB::table('order_goods')->where('order_id','=',$or->id)->first();
             $foods = DB::table('foods')->where('goods_id','=',$Order_goods->goods_id)->first();
             $money += $foods->goods_price;
             $goods_list[] = $foods;
