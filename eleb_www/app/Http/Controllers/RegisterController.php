@@ -21,6 +21,14 @@ class RegisterController extends Controller
                 "message"=> "验证码错误"
             ];
         }
+        $users = DB::select("select count(*) as num from `users` WHERE tel={$request->tel}");
+//        dd($users[0]->num);
+        if ($users[0]->num > 0){
+            return [
+                "status"=> "false",
+                "message"=> "该手机号已注册不用再次祖册"
+            ];
+        }
         User::create(
             [
                 'name'=>$request->username,
