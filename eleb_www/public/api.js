@@ -34,5 +34,7 @@ window.api = {
   // 添加订单接口
   addOrder: '/api/addOrder',
   // 支付接口
-  pay: '/pay.php'
+  pay: '/pay.php',
+   //搜索接口
+    search: '/search'
 };

@@ -19,10 +19,10 @@ Route::get('/shops','ApiController@show');
 
 Route::get('/business','ApiController@goods');
 
+Route::get('/search','ApiController@search');
 //Route::post('/register','RegisterController@register');
 //
 //Route::get('/sms','RegisterController@sms');
-
 
 //Route::get('/sms',function (){
 //    $params = array ();
