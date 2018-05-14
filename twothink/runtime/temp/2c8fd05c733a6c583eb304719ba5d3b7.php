@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:72:"D:\www\twothink\public/../application/user/view/default/login\index.html";i:1526231023;}*/ ?>
 <html lang="zh-CN"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">

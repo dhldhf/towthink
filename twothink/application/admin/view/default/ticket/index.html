@@ -1,0 +1,110 @@
+{extend name="public/base" /}
+
+{block name="body"}
+<div class="sidebar">
+    <!-- 子导航 -->
+
+    <div id="subnav" class="subnav">
+        <!-- 子导航 -->
+        <h3><i class="icon icon-unfold"></i>物业管理</h3>                        <ul class="side-sub-menu">
+        <li class="current">
+            <a class="item" href="/admin/ticket/index.html">报修管理</a>
+        </li>
+        <li>
+            <a class="item" href="/admin/house/index.html">小区租售</a>
+        </li>
+        <li>
+            <a class="item" href="/admin/owner/index.html">业主认证</a>
+        </li>
+        <li>
+            <a class="item" href="/admin/about/index.html">关于我们</a>
+        </li>
+    </ul>
+        <!-- /子导航 -->
+        <!-- 子导航 -->
+        <h3><i class="icon icon-unfold"></i>报修管理</h3>                        <ul class="side-sub-menu">
+        <li>
+            <a class="item" href="/admin/ticket/123.html">123</a>
+        </li>
+    </ul>
+        <!-- /子导航 -->
+    </div>
+
+    <!-- /子导航 -->
+</div>
+<div class="main-title">
+    <h2>报修管理</h2>
+</div>
+
+<div class="cf">
+    <a class="btn" href="{:url('add','pid='.$pid)}">新 增</a>
+    <a class="btn" href="javascript:;">删 除</a>
+    <button class="btn list_sort" url="{:url('sort',array('pid'=>input('get.pid',0)),'')}">排序</button>
+</div>
+
+<div class="data-table table-striped">
+    <table>
+        <thead>
+        <tr>
+            <th class="row-selected">
+                <input class="checkbox check-all" type="checkbox">
+            </th>
+            <th>ID</th>
+            <th>报修标题</th>
+            <th>报修人姓名</th>
+            <th>电话</th>
+            <th>地址</th>
+            <th>报修时间</th>
+            <th>具体内容</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {notempty name="list"}
+        {volist name="list" id="ticket"}
+        <tr>
+            <td><input class="ids row-selected" type="checkbox" name="" id="" value="{$ticket['id']}"> </td>
+            <td>{$ticket.id}</td>
+            <td>{$ticket.title}</td>
+            <td>{$ticket.name}</td>
+            <td>{$ticket.tel}</td>
+            <td>{$ticket.address}</td>
+            <td>{$ticket.create_time|date="Y-m-d H:i:s",###}</td>
+            <td>{$ticket.content}</td>
+            <td>
+                <a title="编辑" href="{:url('edit?id='.$ticket['id'].'&pid='.$pid)}">编辑</a>
+                <a class="confirm ajax-get" title="删除" href="{:url('del?id='.$ticket['id'])}">删除</a>
+            </td>
+        </tr>
+        {/volist}
+        {else/}
+        <td colspan="6" class="text-center"> aOh! 暂时还没有内容! </td>
+        {/notempty}
+        </tbody>
+    </table>
+</div>
+{/block}
+
+{block name="script"}
+<script type="text/javascript">
+    $(function() {
+        //点击排序
+        $('.list_sort').click(function(){
+            var url = $(this).attr('url');
+            var ids = $('.ids:checked');
+            var param = '';
+            if(ids.length > 0){
+                var str = new Array();
+                ids.each(function(){
+                    str.push($(this).val());
+                });
+                param = str.join(',');
+            }
+
+            if(url != undefined && url != ''){
+                window.location.href = url + '/ids/' + param;
+            }
+        });
+    });
+</script>
+{/block}

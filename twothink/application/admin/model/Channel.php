@@ -15,5 +15,5 @@ use think\Model;
  */
 
 class Channel extends Model { 
-    protected $insert = ['status'=>1];  
+    protected $insert = ['status'=>1];
 }
